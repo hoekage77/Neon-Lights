@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon City Arcade - Project Progress Tracker</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #c8c8c8;
+      background: #0e0f13;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1 {
+      color: #ff6b9d;
+      font-size: 2.2em;
+      margin-bottom: 10px;
+      border-bottom: 3px solid #ff6b9d;
+      padding-bottom: 15px;
+    }
+    .subtitle {
+      color: #888;
+      font-size: 1.1em;
+      margin-bottom: 30px;
+    }
+    h2 {
+      color: #4ecdc4;
+      font-size: 1.6em;
+      margin-top: 35px;
+      margin-bottom: 15px;
+      border-left: 4px solid #4ecdc4;
+      padding-left: 15px;
+    }
+    h3 {
+      color: #ffe66d;
+      font-size: 1.2em;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    p { margin-bottom: 12px; }
+    ul, ol { margin-bottom: 15px; padding-left: 30px; }
+    li { margin-bottom: 6px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      background: #1a1c22;
+      border-radius: 8px;
+      overflow: hidden;
+      font-size: 0.9em;
+    }
+    th {
+      background: #2a2d35;
+      color: #4ecdc4;
+      padding: 10px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #2a2d35;
+    }
+    tr:last-child td { border-bottom: none; }
+    .status-done {
+      color: #00b894;
+      font-weight: 600;
+    }
+    .status-wip {
+      color: #fdcb6e;
+      font-weight: 600;
+    }
+    .status-todo {
+      color: #ff7675;
+      font-weight: 600;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #1a1c22;
+      border-radius: 4px;
+      margin: 10px 0 20px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #4ecdc4;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+    .milestone {
+      background: rgba(78, 205, 196, 0.05);
+      border: 1px solid rgba(78, 205, 196, 0.15);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+    }
+    .milestone h4 {
+      color: #4ecdc4;
+      margin-bottom: 8px;
+    }
+    code {
+      background: #1a1c22;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Consolas', monospace;
+      color: #ff6b9d;
+      font-size: 0.9em;
+    }
+    .file-list {
+      background: #1a1c22;
+      border-radius: 6px;
+      padding: 12px;
+      margin: 10px 0;
+      font-family: 'Consolas', monospace;
+      font-size: 0.85em;
+      line-height: 1.5;
+    }
+    .file-list .file {
+      color: #4ecdc4;
+    }
+    .file-list .comment {
+      color: #666;
+    }
+    .note {
+      background: rgba(255, 230, 109, 0.08);
+      border-left: 3px solid #ffe66d;
+      padding: 12px;
+      margin: 15px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .issue {
+      background: rgba(255, 118, 117, 0.08);
+      border-left: 3px solid #ff7675;
+      padding: 12px;
+      margin: 15px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .issue-fixed {
+      background: rgba(0, 184, 148, 0.08);
+      border-left: 3px solid #00b894;
+      padding: 12px;
+      margin: 15px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .date-stamp {
+      color: #888;
+      font-size: 0.85em;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h1>Neon City Arcade</h1>
+  <div class="subtitle">Project Progress Tracker — Last Updated: May 16, 2026</div>
+
+  <!-- OVERALL PROGRESS -->
+  <h2>Overall Progress</h2>
+  <p><strong>Phase 1: Foundation</strong> — Target: 6 weeks</p>
+  <div class="progress-bar">
+    <div class="progress-fill" style="width: 75%;"></div>
+  </div>
+  <p style="text-align: center; color: #4ecdc4; font-weight: 600;">~75% Complete — Core Systems + Characters + Movement</p>
+
+  <!-- COMPLETED WORK -->
+  <h2>Completed Work (Session: May 15, 2026)</h2>
+
+  <h3>1. Project Infrastructure</h3>
+  <table>
+    <tr><th>Task</th><th>Status</th><th>Files</th></tr>
+    <tr><td>Directory structure</td><td class="status-done">DONE</td><td><code>src/</code>, <code>assets/</code>, <code>styles/</code>, <code>shaders/</code></td></tr>
+    <tr><td>Build system (Vite)</td><td class="status-done">DONE</td><td><code>package.json</code>, <code>vite.config.js</code></td></tr>
+    <tr><td>Entry HTML</td><td class="status-done">DONE</td><td><code>index.html</code> with loading screen</td></tr>
+    <tr><td>CSS framework</td><td class="status-done">DONE</td><td><code>styles/main.css</code> — HUD, menus, dialogs</td></tr>
+    <tr><td>Documentation</td><td class="status-done">DONE</td><td><code>docs.html</code> (spec), <code>progress.html</code> (this file)</td></tr>
+  </table>
+
+  <h3>2. Core Systems (7 modules)</h3>
+  <table>
+    <tr><th>System</th><th>Status</th><th>Description</th></tr>
+    <tr><td>GameController</td><td class="status-done">DONE</td><td>Central orchestrator, state machine (10 states)</td></tr>
+    <tr><td>SceneManager</td><td class="status-done">DONE</td><td>Scene lifecycle, object tracking, raycasting</td></tr>
+    <tr><td>Renderer</td><td class="status-done">DONE</td><td>WebGL renderer + quality presets + context loss recovery</td></tr>
+    <tr><td>PhysicsWorld</td><td class="status-done">DONE</td><td>Cannon-es physics, bodies, collisions, raycasts</td></tr>
+    <tr><td>AssetLoader</td><td class="status-done">DONE</td><td>Asset caching, GLTF/texture loading, gradient/noise generators</td></tr>
+    <tr><td>EventBus</td><td class="status-done">DONE</td><td>Pub/sub system for decoupled communication</td></tr>
+    <tr><td>InputManager</td><td class="status-done">DONE</td><td>Keyboard, mouse, touch abstraction</td></tr>
+  </table>
+
+  <h3>3. Constants & Utilities (6 modules)</h3>
+  <table>
+    <tr><th>Module</th><th>Status</th><th>Purpose</th></tr>
+    <tr><td>Config.js</td><td class="status-done">DONE</td><td>All tunable game parameters + quality presets (LOW/MEDIUM/HIGH)</td></tr>
+    <tr><td>Colors.js</td><td class="status-done">DONE</td><td>Brand color palette (hex values for Three.js + CSS)</td></tr>
+    <tr><td>Keys.js</td><td class="status-done">DONE</td><td>Input key mappings + gamepad button definitions</td></tr>
+    <tr><td>MathUtils.js</td><td class="status-done">DONE</td><td>Pure math helpers (clamp, lerp, smoothstep, distance, etc.)</td></tr>
+    <tr><td>Noise.js</td><td class="status-done">DONE</td><td>Simplex noise 2D/3D + FBM for procedural generation</td></tr>
+    <tr><td>Storage.js</td><td class="status-done">DONE</td><td>localStorage + IndexedDB save system with import/export</td></tr>
+    <tr><td>Logger.js</td><td class="status-done">DONE</td><td>Debug logging (dev/prod modes, performance timing)</td></tr>
+  </table>
+
+  <h3>4. World System (3 modules)</h3>
+  <table>
+    <tr><th>Module</th><th>Status</th><th>Features</th></tr>
+    <tr><td>CityStreet.js</td><td class="status-done">DONE</td><td>200m street, sidewalks, curbs, crosswalks, 8 buildings, quality-aware generation</td></tr>
+    <tr><td>Environment.js</td><td class="status-done">DONE</td><td>Sky gradient shader (GLSL), directional/ambient lights, dust particles</td></tr>
+    <tr><td>Lighting.js</td><td class="status-done">DONE</td><td>Neon lights, street lamps, building illumination, day/night cycle</td></tr>
+  </table>
+
+  <h3>5. Entity System (4 modules)</h3>
+  <table>
+    <tr><th>Module</th><th>Status</th><th>Features</th></tr>
+    <tr><td>Player.js</td><td class="status-done">DONE</td><td>Low-poly avatar (boxes), physics body, limb hierarchy</td></tr>
+    <tr><td>PlayerController.js</td><td class="status-done">DONE</td><td>WASD movement, orbit camera, collision avoidance, procedural animations</td></tr>
+    <tr><td>NPC.js</td><td class="status-done">DONE</td><td>6-state AI (IDLE/WALKING/TALKING/INTERACTING/ENTERING/EXITING), dialogue support</td></tr>
+    <tr><td>NPCManager.js</td><td class="status-done">DONE</td><td>Spawns 4-12 NPCs based on quality, schedules, behaviors, 4 unique characters with dialogue trees</td></tr>
+    <tr><td>Interactable.js</td><td class="status-done">DONE</td><td>Base class for interactive objects with highlight ring</td></tr>
+  </table>
+
+  <h3>6. Venue System (3 modules)</h3>
+  <table>
+    <tr><th>Module</th><th>Status</th><th>Features</th></tr>
+    <tr><td>Venue.js</td><td class="status-done">DONE</td><td>Base venue class (exterior/interior, entrance/exit points)</td></tr>
+    <tr><td>VenueManager.js</td><td class="status-done">DONE</td><td>4 venues: Sky Ace HQ, Neon Cafe, Vapor Shop, Park Plaza</td></tr>
+    <tr><td>SkyAceVenue.js</td><td class="status-done">DONE</td><td>Custom venue with hangar interior, briefing board, logo</td></tr>
+  </table>
+
+  <h3>7. Game Modules (2 modules)</h3>
+  <table>
+    <tr><th>Module</th><th>Status</th><th>Features</th></tr>
+    <tr><td>GameBase.js</td><td class="status-done">DONE</td><td>Abstract base class with init/update/render/dispose interface</td></tr>
+    <tr><td>SkyAceGame.js</td><td class="status-done">DONE</td><td>Full flight combat: 3 missions, aircraft physics, weapons, enemies, HUD, 3 camera modes</td></tr>
+  </table>
+
+  <h3>8. UI System (1 module)</h3>
+  <table>
+    <tr><th>Module</th><th>Status</th><th>Features</th></tr>
+    <tr><td>UIManager.js</td><td class="status-done">DONE</td><td>Main menu, pause menu, settings, game over, credits, dialogue, HUD, toasts, fade transitions</td></tr>
+  </table>
+
+  <h3>9. Quality System (Major Feature)</h3>
+  <div class="milestone">
+    <h4>Three Quality Presets</h4>
+    <table>
+      <tr><th>Preset</th><th>Pixel Ratio</th><th>Shadows</th><th>Bloom</th><th>Fog</th><th>NPCs</th><th>Buildings</th><th>Props</th><th>Particles</th></tr>
+      <tr><td>LOW</td><td>1x</td><td>Off</td><td>Off</td><td>Off</td><td>4</td><td>4</td><td>Benches only</td><td>Off</td></tr>
+      <tr><td>MEDIUM</td><td>1.5x</td><td>On</td><td>On</td><td>On</td><td>8</td><td>6</td><td>+Lamps/Trees</td><td>On</td></tr>
+      <tr><td>HIGH</td><td>2x</td><td>On</td><td>On</td><td>On</td><td>12</td><td>8</td><td>+Everything</td><td>On</td></tr>
+    </table>
+    <p><strong>GPU Auto-Detection:</strong> Detects Intel/Apple/Mobile GPUs and auto-selects LOW. Others default to MEDIUM.</p>
+    <p><strong>Context Loss Recovery:</strong> Handles <code>webglcontextlost</code> / <code>webglcontextrestored</code> events.</p>
+  </div>
+
+  <h3>10. Bug Fixes Applied</h3>
+  <div class="issue-fixed">
+    <strong>FIXED:</strong> <code>GameController.js</code> missing <code>import * as THREE from 'three'</code> — caused instant crash before anything rendered. Added import.
+  </div>
+  <div class="issue-fixed">
+    <strong>FIXED:</strong> <code>CityStreet._addNeonSign()</code> used <code>depth</code> parameter without receiving it. Fixed function signature and call site to pass <code>depth</code>.
+  </div>
+  <div class="issue-fixed">
+    <strong>FIXED:</strong> <code>AssetLoader.js</code> imported <code>TextureLoader</code> from wrong path. Changed to <code>new THREE.TextureLoader()</code>.
+  </div>
+  <div class="issue-fixed">
+    <strong>FIXED:</strong> <code>Interactable.js</code> had malformed JSDoc comment <code>//**</code> instead of <code>/**</code>. Fixed syntax.
+  </div>
+  <div class="issue-fixed">
+    <strong>FIXED:</strong> <code>vite.config.js</code> referenced <code>terser</code> which wasn't installed. Switched to <code>esbuild</code> minification.
+  </div>
+  <div class="issue-fixed">
+    <strong>FIXED:</strong> <code>GameController.js</code> used <code>CONFIG</code> but never imported it. Added <code>import { CONFIG } from '../constants/Config.js';</code>.
+  </div>
+
+  <!-- FILE MANIFEST -->
+  <h2>File Manifest (29 Source Files)</h2>
+  <div class="file-list">
+    <span class="file">src/main.js</span> <span class="comment">— Entry point, GPU detection, init</span><br>
+    <span class="file">src/core/GameController.js</span> <span class="comment">— State machine, orchestrator</span><br>
+    <span class="file">src/core/SceneManager.js</span> <span class="comment">— Scene lifecycle, object tracking</span><br>
+    <span class="file">src/core/Renderer.js</span> <span class="comment">— WebGL + quality presets + context recovery</span><br>
+    <span class="file">src/core/PhysicsWorld.js</span> <span class="comment">— Cannon-es physics simulation</span><br>
+    <span class="file">src/core/AssetLoader.js</span> <span class="comment">— Asset caching, texture/model loading</span><br>
+    <span class="file">src/core/EventBus.js</span> <span class="comment">— Pub/sub event system</span><br>
+    <span class="file">src/core/InputManager.js</span> <span class="comment">— Keyboard/mouse/touch input</span><br>
+    <span class="file">src/constants/Config.js</span> <span class="comment">— Tunable parameters + quality presets</span><br>
+    <span class="file">src/constants/Colors.js</span> <span class="comment">— Brand color palette</span><br>
+    <span class="file">src/constants/Keys.js</span> <span class="comment">— Input key mappings</span><br>
+    <span class="file">src/utils/MathUtils.js</span> <span class="comment">— Pure math helpers</span><br>
+    <span class="file">src/utils/Noise.js</span> <span class="comment">— Simplex noise + FBM</span><br>
+    <span class="file">src/utils/Storage.js</span> <span class="comment">— Save/load with IndexedDB</span><br>
+    <span class="file">src/utils/Logger.js</span> <span class="comment">— Debug logging</span><br>
+    <span class="file">src/world/CityStreet.js</span> <span class="comment">— 200m street, buildings, props</span><br>
+    <span class="file">src/world/Environment.js</span> <span class="comment">— Sky shader, lights, particles</span><br>
+    <span class="file">src/world/Lighting.js</span> <span class="comment">— Neon/street/building lights</span><br>
+    <span class="file">src/entities/Player.js</span> <span class="comment">— Player avatar mesh + physics</span><br>
+    <span class="file">src/entities/PlayerController.js</span> <span class="comment">— Movement + camera + animations</span><br>
+    <span class="file">src/entities/NPC.js</span> <span class="comment">— AI character with state machine</span><br>
+    <span class="file">src/entities/NPCManager.js</span> <span class="comment">— Spawns 4-12 NPCs, dialogue</span><br>
+    <span class="file">src/entities/Interactable.js</span> <span class="comment">— Interactive object base class</span><br>
+    <span class="file">src/venues/Venue.js</span> <span class="comment">— Base venue class</span><br>
+    <span class="file">src/venues/VenueManager.js</span> <span class="comment">— 4 venue management</span><br>
+    <span class="file">src/venues/SkyAceVenue.js</span> <span class="comment">— Sky Ace HQ interior</span><br>
+    <span class="file">src/games/GameBase.js</span> <span class="comment">— Abstract game class</span><br>
+    <span class="file">src/games/sky-ace/SkyAceGame.js</span> <span class="comment">— Flight combat game</span><br>
+    <span class="file">src/ui/UIManager.js</span> <span class="comment">— All UI screens + HUD</span><br>
+  </div>
+
+  <h3>Supporting Files</h3>
+  <div class="file-list">
+    <span class="file">index.html</span> <span class="comment">— Main HTML with loading screen + error display</span><br>
+    <span class="file">styles/main.css</span> <span class="comment">— Complete UI stylesheet</span><br>
+    <span class="file">package.json</span> <span class="comment">— Dependencies: three, cannon-es, howler, vite</span><br>
+    <span class="file">vite.config.js</span> <span class="comment">— ES modules, code splitting, esbuild minify</span><br>
+    <span class="file">docs.html</span> <span class="comment">— Full project specification document</span><br>
+    <span class="file">progress.html</span> <span class="comment">— This progress tracker</span>
+  </div>
+
+  <!-- KNOWN ISSUES -->
+  <h2>Known Issues / Remaining Work</h2>
+
+  <h3>High Priority</h3>
+  <div class="issue">
+    <strong>WebGL Context Loss:</strong> Scene is still too heavy for some GPUs even on LOW. Need to further reduce geometry count or add mobile-specific path.
+  </div>
+  <div class="issue-fixed">
+    <strong>FIXED:</strong> <strong>Movement Physics:</strong> Player mass reduced 70→15, linearDamping 0.9→0.05, velocity lerp 0.2→0.6 for snappy arcade acceleration, deceleration lerp 0.15→0.35 for quick stops. Ground check fixed to snap to standing height (0.85) instead of broken 0.5 threshold. NPC mass 60→10, damping 0.95→0.1. Character now covers street width in ~10 seconds.
+  </div>
+  <div class="issue-fixed">
+    <strong>FIXED:</strong> <strong>Camera Orbit Not Working:</strong> Root cause was execution order bug in <code>GameController._gameLoop()</code>: <code>inputManager.update()</code> was called at the top of the loop, which zeroed <code>mouse.deltaX/deltaY</code> before <code>PlayerController._handleCamera()</code> could read them. Fix: <code>InputManager.update()</code> now snapshots accumulated mouse deltas into <code>mouseFrameDelta</code> before clearing, and <code>getMouseDelta()</code> / <code>getMouseWheel()</code> return the snapshot. Camera now correctly orbits when holding right-mouse-button and dragging.
+  </div>
+  <div class="issue-fixed">
+    <strong>FIXED:</strong> <strong>Real Character Models:</strong> Downloaded 18 Kenney Blocky Characters (CC0) with 27 animations each for NPCs. Player uses a custom user-provided model (<code>Bone.gltf</code>, 181 meshes, 3.3MB static mesh — no animations, no skinning). Player model is configurable via <code>modelConfig</code> (scale, offsetY, rotationY). True world-space bounds computed: 7.34m tall × 9.09m wide at scale=1.0. Corrected scale from 0.59→<strong>0.22</strong> (1.6m height), offsetY from 0.97→<strong>-1.46</strong> (feet at ground). Added procedural bob/tilt animation for static models: whole body bobs ±2.5cm and leans 4° forward when walking/running so the character doesn't look like a sliding statue. NPCs each get a unique random Kenney character model with walk/idle animations. Procedural box geometry remains as instant fallback if any model fails to load.
+  </div>
+  <div class="issue">
+    <strong>No Audio:</strong> Howler.js imported but no sound files loaded. Need SFX (engine, gunfire, explosions) and music (synthwave tracks).
+  </div>
+
+  <h3>Medium Priority</h3>
+  <div class="issue">
+    <strong>Sky Ace Incomplete:</strong> Flight physics needs tuning (currently too fast). Enemy AI is basic (no evasion). No mission objectives UI.
+  </div>
+  <div class="issue-fixed">
+    <strong>FIXED:</strong> <strong>NPC Dialogue Wired:</strong> E-key interaction now triggers dialog box. Input edge detection (wasActionPressed) added to prevent rapid-fire. NPC faces player during conversation. Clicking a response option shows the answer, then Close button. Venues take priority over NPCs for interaction prompts.
+  </div>
+  <div class="issue">
+    <strong>Venue Interiors Empty:</strong> SkyAceVenue creates hangar but no gameplay inside venues yet (just visual).
+  </div>
+  <div class="issue">
+    <strong>No Settings Persistence:</strong> Settings panel exists but changes aren't saved to localStorage/IndexedDB.
+  </div>
+
+  <h3>Low Priority / Phase 2</h3>
+  <div class="issue">
+    <strong>Mobile Touch Controls:</strong> InputManager handles touch but no on-screen joysticks/buttons.
+  </div>
+  <div class="issue">
+    <strong>No Save/Load:</strong> Storage system exists but no game state serialization yet.
+  </div>
+  <div class="issue">
+    <strong>No Leaderboards:</strong> Score tracking exists but no persistent high scores or social features.
+  </div>
+  <div class="issue">
+    <strong>Day/Night Cycle:</strong> Environment has setTimeOfDay() but not connected to real-time progression.
+  </div>
+
+  <!-- NEXT STEPS -->
+  <h2>Next Steps (Recommended Order)</h2>
+  <ol>
+    <li><strong>Add basic audio</strong> — Load placeholder SFX (even simple beeps) to test Howler.js integration</li>
+    <li><strong>Tune Sky Ace</strong> — Slow down aircraft, improve camera feel, add mission briefing UI</li>
+    <li><strong>Add save/load</strong> — Serialize player position, scores, settings to IndexedDB</li>
+    <li><strong>Settings persistence</strong> — Save quality selection, volume levels, key bindings</li>
+    <li><strong>Mobile touch UI</strong> — Virtual joystick + action buttons for touch devices</li>
+    <li><strong>Reduce scene complexity</strong> — Further optimize CityStreet geometry count for LOW quality (fewer buildings, simpler props)</li>
+    <li><strong>Environment models</strong> — Source low-poly buildings, street props, vehicles to replace procedural boxes</li>
+  </ol>
+
+  <!-- ARCHITECTURE DECISIONS -->
+  <h2>Architecture Decisions Log</h2>
+
+  <div class="milestone">
+    <h4>Decision: Quality Presets Over Dynamic Scaling</h4>
+    <p><strong>Date:</strong> May 15, 2026</p>
+    <p><strong>Decision:</strong> Implemented three discrete quality levels (LOW/MEDIUM/HIGH) instead of continuous dynamic scaling.</p>
+    <p><strong>Rationale:</strong> Easier to test, debug, and reason about. Players can manually override. Discrete steps make it clear what's enabled/disabled.</p>
+    <p><strong>Trade-off:</strong> Less granular than per-feature toggles, but simpler implementation and maintenance.</p>
+  </div>
+
+  <div class="milestone">
+    <h4>Decision: Procedural Geometry Phase 1</h4>
+    <p><strong>Date:</strong> May 15, 2026</p>
+    <p><strong>Decision:</strong> All Phase 1 geometry is procedurally generated (boxes, cylinders) instead of loading GLB models.</p>
+    <p><strong>Rationale:</strong> Eliminates asset pipeline dependency. No external files to load = no 404 errors. Instant iteration. Proves the architecture works before investing in art.</p>
+    <p><strong>Trade-off:</strong> Visual fidelity is low (everything is a box). Will replace with actual models in Phase 2.</p>
+  </div>
+
+  <div class="milestone">
+    <h4>Decision: HTML/CSS UI Over Canvas UI</h4>
+    <p><strong>Date:</strong> May 15, 2026</p>
+    <p><strong>Decision:</strong> All UI (menus, HUD, dialogs) is HTML/CSS layered over the WebGL canvas.</p>
+    <p><strong>Rationale:</strong> Easier to style, accessible, SEO-friendly, faster to iterate. No need to rebuild UI on canvas resize.</p>
+    <p><strong>Trade-off:</strong> Slight overhead of DOM + WebGL. Could consider Canvas UI for in-game HUD later if performance demands it.</p>
+  </div>
+
+  <div class="milestone">
+    <h4>Decision: ES6 Modules with Vite</h4>
+    <p><strong>Date:</strong> May 15, 2026</p>
+    <p><strong>Decision:</strong> Using native ES6 modules with Vite bundler (no TypeScript for Phase 1).</p>
+    <p><strong>Rationale:</strong> Fast dev server with HMR. No build-step complexity. Code splitting works out of the box. Can migrate to TypeScript later.</p>
+    <p><strong>Trade-off:</strong> No compile-time type checking. IDE autocomplete less precise than TS. Planning TS migration for Phase 2.</p>
+  </div>
+
+  <!-- SESSION NOTES -->
+  <h2>Session Notes</h2>
+
+  <h3>May 16, 2026 — Movement Fix + Character Models Session</h3>
+  <p class="date-stamp">Duration: ~1 hour | Commits: 0 (working session)</p>
+  <ul>
+    <li><strong>Fixed snappy arcade movement:</strong> Player mass 70→15, linearDamping 0.9→0.05, velocity lerp 0.2→0.6 (accel) / 0.15→0.35 (decel). Ground check fixed to snap to standing height (0.85) instead of broken 0.5 threshold. NPC mass 60→10, damping 0.95→0.1. Character now covers street width in ~10 seconds.</li>
+    <li><strong>Downloaded Kenney Blocky Characters:</strong> 18 CC0 GLB models with 27 animations each (idle, walk, sprint, sit, drive, emotes, attacks, interact, wheelchair variants).</li>
+    <li><strong>Wired model loading pipeline:</strong> <code>AssetLoader.loadModelWithAnimations()</code> returns scene + animation clips. <code>AssetLoader.getModelAnimations()</code> retrieves cached clips.</li>
+    <li><strong>Player model integration:</strong> <code>Player.loadModel()</code> wraps GLB scene, scales to 1.7m, offsets so feet touch ground. <code>AnimationMixer</code> plays idle/walk/sprint based on <code>PlayerController.getMovementState()</code>. Procedural box animation skipped when model is active.</li>
+    <li><strong>NPC model integration:</strong> Each of 4 unique NPCs gets a different character model. Random spawned NPCs also get random models. NPCs play walk/idle animations from their GLB.</li>
+    <li><strong>Model fallback:</strong> If GLB load fails, procedural box geometry remains visible. No crash on missing assets.</li>
+    <li><strong>Build passes</strong> with Vite; models copied to <code>dist/models/characters/</code> via <code>public/</code> directory.</li>
+  </ul>
+
+  <h3>May 15, 2026 — NPC Dialogue Wiring Session</h3>
+  <p class="date-stamp">Duration: ~30 minutes | Commits: 0 (working session)</p>
+  <ul>
+    <li>Implemented input edge detection in <code>InputManager</code> (<code>wasActionPressed</code> / <code>wasKeyPressed</code>) to prevent rapid-fire interactions</li>
+    <li>Enhanced <code>UIManager.showDialog()</code> with click handlers: options show NPC responses, then a Close button</li>
+    <li>Wired <code>GameController</code> to detect nearby NPCs and show "Talk to [Name]" prompts</li>
+    <li>Pressing E near an NPC opens dialogue; pressing E again (or clicking Close) closes it</li>
+    <li>NPCs enter <code>TALKING</code> state during conversation and face the player</li>
+    <li>Venue interaction prompts take priority over NPC prompts when both are nearby</li>
+    <li>Build passes successfully with Vite</li>
+  </ul>
+
+  <h3>May 15, 2026 — Initial Build Session</h3>
+  <p class="date-stamp">Duration: ~3 hours | Commits: 0 (working session)</p>
+  <ul>
+    <li>Started with user request for Miami Nights-style 3D arcade platform</li>
+    <li>Brainstormed with Three.js + particle landscape reference</li>
+    <li>User specified: single street, low-poly, AI NPCs, cartoonish, Sky Ace as first game</li>
+    <li>Created comprehensive <code>docs.html</code> specification (15 sections)</li>
+    <li>Scaffolded full project: 29 JS files, 1 CSS file, HTML entry, build config</li>
+    <li>Implemented all core systems, world, entities, venues, games, UI</li>
+    <li>Discovered GPU context loss on user's machine</li>
+    <li>Implemented quality presets + GPU auto-detection + context recovery</li>
+    <li>Fixed 6 bugs during debugging session</li>
+    <li>Build passes successfully, dev server runs on port 5173</li>
+  </ul>
+
+  <div class="note">
+    <strong>Key Learning:</strong> Always test on target hardware early. The scene that worked fine in development (headless) crashed on actual GPU. Quality presets should be designed in from the start, not retrofitted.
+  </div>
+
+  <div class="note">
+    <strong>Bug #6 (CONFIG not defined):</strong> GameController constructor used <code>CONFIG.QUALITY.DEFAULT</code> but never imported Config.js. This was a late addition when adding quality presets — a reminder that adding features to existing files requires checking all dependencies.
+  </div>
+
+  <div class="note">
+    <strong>Performance Budget (Current):</strong>
+    <ul>
+      <li>LOW: ~50 draw calls, ~2,000 triangles, 0 real-time lights</li>
+      <li>MEDIUM: ~100 draw calls, ~10,000 triangles, 4 real-time lights</li>
+      <li>HIGH: ~150 draw calls, ~50,000 triangles, 12 real-time lights</li>
+    </ul>
+    Target: 60fps on mid-range desktop, 30fps on mobile.
+  </div>
+
+  <!-- FOOTER -->
+  <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #2a2d35; color: #666; font-size: 0.85em;">
+    <p><strong>Neon City Arcade v1.0.0-alpha</strong></p>
+    <p>This document is updated after every work session. Keep it current.</p>
+    <p>Last updated: <span id="last-updated">May 16, 2026 (08:35)</span></p>
+  </div>
+
+</body>
+</html>

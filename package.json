@@ -1,0 +1,36 @@
+{
+  "name": "neon-city-arcade",
+  "version": "1.0.0-alpha",
+  "description": "A browser-based 3D arcade platform with a Miami Nights-inspired neon city street",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "lint": "eslint src/**/*.js"
+  },
+  "dependencies": {
+    "three": "^0.165.0",
+    "cannon-es": "^0.20.0",
+    "howler": "^2.2.4"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "vitest": "^1.0.0",
+    "eslint": "^8.57.0"
+  },
+  "keywords": [
+    "three.js",
+    "webgl",
+    "arcade",
+    "game",
+    "browser",
+    "3d"
+  ],
+  "author": "Core Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

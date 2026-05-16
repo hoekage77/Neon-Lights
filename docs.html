@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon City Arcade - Project Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #e6e6e6;
+            background: #0e0f13;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1 {
+            color: #ff6b9d;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #ff6b9d;
+            padding-bottom: 15px;
+        }
+        h2 {
+            color: #4ecdc4;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4ecdc4;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #ffe66d;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        h4 {
+            color: #a8d8ea;
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+        p {
+            margin-bottom: 15px;
+            color: #c8c8c8;
+        }
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 30px;
+        }
+        li {
+            margin-bottom: 8px;
+            color: #c8c8c8;
+        }
+        code {
+            background: #1a1c22;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: #ff6b9d;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #1a1c22;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-left: 3px solid #4ecdc4;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #c8c8c8;
+            font-size: 0.85em;
+            line-height: 1.5;
+        }
+        .warning {
+            background: rgba(255, 107, 157, 0.1);
+            border-left: 4px solid #ff6b9d;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .info {
+            background: rgba(78, 205, 196, 0.1);
+            border-left: 4px solid #4ecdc4;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .success {
+            background: rgba(255, 230, 109, 0.1);
+            border-left: 4px solid #ffe66d;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #1a1c22;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th {
+            background: #2a2d35;
+            color: #4ecdc4;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #2a2d35;
+            color: #c8c8c8;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .meta {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #2a2d35;
+        }
+        .version-badge {
+            display: inline-block;
+            background: #ff6b9d;
+            color: #0e0f13;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        .section-number {
+            display: inline-block;
+            background: #4ecdc4;
+            color: #0e0f13;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: 700;
+            margin-right: 10px;
+            font-size: 0.9em;
+        }
+        .architecture-diagram {
+            background: #1a1c22;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+            color: #c8c8c8;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        a {
+            color: #4ecdc4;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .toc {
+            background: #1a1c22;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .toc li {
+            padding: 5px 0;
+        }
+        .toc a {
+            color: #c8c8c8;
+        }
+        .toc a:hover {
+            color: #4ecdc4;
+        }
+        .priority-high {
+            color: #ff6b9d;
+            font-weight: 600;
+        }
+        .priority-medium {
+            color: #ffe66d;
+            font-weight: 600;
+        }
+        .priority-low {
+            color: #4ecdc4;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <h1>Neon City Arcade <span class="version-badge">v1.0.0-alpha</span></h1>
+    
+    <div class="meta">
+        <strong>Project Type:</strong> Browser-based 3D Arcade Platform | 
+        <strong>Engine:</strong> Three.js (WebGL) | 
+        <strong>Style:</strong> Stylized Cartoonish / Low-Poly | 
+        <strong>Initial Scale:</strong> Single Street | 
+        <strong>Last Updated:</strong> May 15, 2026 (18:58)<br>
+        <strong style="color: #4ecdc4;">Progress Tracker:</strong> <a href="progress.html">View Current Progress &rarr;</a>
+    </div>
+
+    <div class="warning">
+        <strong>This document is the single source of truth for all development on this project.</strong>
+        All code changes, asset creation, and design decisions must align with the specifications outlined here.
+        When in doubt, refer back to this document. Updates to this document require team discussion.
+    </div>
+
+    <div class="success">
+        <strong>Implementation Status:</strong> Phase 1 Foundation ~65% Complete<br><br>
+        <strong>Done:</strong> 29 source files, 7 core systems, 3 world modules, 4 entity modules, 3 venue modules, 2 game modules, full UI system, quality presets (LOW/MEDIUM/HIGH), GPU auto-detection, context loss recovery, 6 bugs fixed during debugging<br><br>
+        <strong>Remaining:</strong> Audio integration, 3D model assets, NPC dialogue wiring, Sky Ace tuning, save/load persistence, mobile touch controls, leaderboard system<br><br>
+        <a href="progress.html" style="color: #4ecdc4; font-weight: 600;">View Full Progress Tracker &rarr;</a>
+    </div>
+
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+            <li><a href="#vision">1. Project Vision & Core Concept</a></li>
+            <li><a href="#architecture">2. Technical Architecture</a></li>
+            <li><a href="#structure">3. Project File Structure</a></li>
+            <li><a href="#conventions">4. Development Conventions & Standards</a></li>
+            <li><a href="#city">5. World Design: Neon City Street</a></li>
+            <li><a href="#player">6. Player Character System</a></li>
+            <li><a href="#npc">7. AI NPC System</a></li>
+            <li><a href="#games">8. Game Modules</a></li>
+            <li><a href="#flight">9. Game 1: Sky Ace (Flight Combat)</a></li>
+            <li><a href="#art">10. Art Style & Asset Guidelines</a></li>
+            <li><a href="#audio">11. Audio Design</a></li>
+            <li><a href="#multiplayer">12. Multiplayer Roadmap</a></li>
+            <li><a href="#testing">13. Testing & QA Procedures</a></li>
+            <li><a href="#deployment">14. Build & Deployment</a></li>
+            <li><a href="#roadmap">15. Development Roadmap</a></li>
+        </ul>
+    </div>
+
+    <h2><span class="section-number">1</span> Project Vision & Core Concept</h2>
+    
+    <h3>1.1 The Big Idea</h3>
+    <p>
+        <strong>Neon City Arcade</strong> is a browser-based 3D platform where players explore a stylized, neon-lit city street 
+        and enter various venues to play arcade-style games. Inspired by mobile life simulation games (Miami Nights style), 
+        the experience blends open-world exploration with curated game content.
+    </p>
+
+    <h3>1.2 Core Pillars</h3>
+    <ul>
+        <li><strong>Exploration:</strong> Players walk around a living 3D world, discovering venues organically</li>
+        <li><strong>Immersion:</strong> The city feels alive with NPCs, dynamic lighting, and atmospheric effects</li>
+        <li><strong>Accessibility:</strong> Runs in any modern browser, no installation required</li>
+        <li><strong>Performance:</strong> 60fps target on mid-range devices, optimized for WebGL</li>
+        <li><strong>Extensibility:</strong> Designed to easily add new venues and games over time</li>
+    </ul>
+
+    <h3>1.3 Target Audience</h3>
+    <ul>
+        <li>Casual gamers who enjoy browser-based experiences</li>
+        <li>Fans of arcade and retro gaming aesthetics</li>
+        <li>Players who enjoy light exploration and social elements</li>
+        <li>Age rating: E for Everyone (cartoonish, no violence)</li>
+    </ul>
+
+    <h3>1.4 Platform Requirements</h3>
+    <table>
+        <tr>
+            <th>Requirement</th>
+            <th>Specification</th>
+        </tr>
+        <tr>
+            <td>Minimum Browser</td>
+            <td>Chrome 90+, Firefox 88+, Safari 14+, Edge 90+</td>
+        </tr>
+        <tr>
+            <td>WebGL Version</td>
+            <td>WebGL 2.0 (fallback to WebGL 1.0 with reduced effects)</td>
+        </tr>
+        <tr>
+            <td>Target FPS</td>
+            <td>60fps on desktop, 30fps minimum on mobile</td>
+        </tr>
+        <tr>
+            <td>Screen Support</td>
+            <td>Responsive: 1920x1080 down to 375x667 (mobile)</td>
+        </tr>
+        <tr>
+            <td>Input Methods</td>
+            <td>Keyboard + Mouse (primary), Touch (secondary), Gamepad (future)</td>
+        </tr>
+    </table>
+
+    <h2><span class="section-number">2</span> Technical Architecture</h2>
+
+    <h3>2.1 Technology Stack</h3>
+    <table>
+        <tr>
+            <th>Layer</th>
+            <th>Technology</th>
+            <th>Version</th>
+            <th>Purpose</th>
+        </tr>
+        <tr>
+            <td>3D Engine</td>
+            <td>Three.js</td>
+            <td>^0.165.0</td>
+            <td>Core 3D rendering, scene management</td>
+        </tr>
+        <tr>
+            <td>Physics</td>
+            <td>Cannon-es</td>
+            <td>^0.20.0</td>
+            <td>Player movement, collisions, vehicle physics</td>
+        </tr>
+        <tr>
+            <td>State Management</td>
+            <td>Vanilla JS (EventEmitter pattern)</td>
+            <td>ES6+</td>
+            <td>Game state, player data, venue management</td>
+        </tr>
+        <tr>
+            <td>Build Tool</td>
+            <td>Vite</td>
+            <td>^5.0.0</td>
+            <td>Development server, bundling, hot reload</td>
+        </tr>
+        <tr>
+            <td>Asset Pipeline</td>
+            <td>GLTF/GLB, procedural generation</td>
+            <td>-</td>
+            <td>3D models, textures, animations</td>
+        </tr>
+        <tr>
+            <td>Audio</td>
+            <td>Howler.js</td>
+            <td>^2.2.0</td>
+            <td>Sound effects, music, spatial audio</td>
+        </tr>
+        <tr>
+            <td>UI</td>
+            <td>Vanilla JS + CSS</td>
+            <td>-</td>
+            <td>In-game HUD, menus, dialogs</td>
+        </tr>
+        <tr>
+            <td>Storage</td>
+            <td>localStorage + IndexedDB</td>
+            <td>-</td>
+            <td>Save data, preferences, high scores</td>
+        </tr>
+    </table>
+
+    <h3>2.2 High-Level Architecture</h3>
+    <div class="architecture-diagram">
+┌─────────────────────────────────────────────────────────────────┐
+│                        USER INTERFACE                            │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐             │
+│  │ Main Menu   │  │ HUD         │  │ Pause Menu  │             │
+│  │ (HTML/CSS)  │  │ (HTML/CSS)  │  │ (HTML/CSS)  │             │
+│  └─────────────┘  └─────────────┘  └─────────────┘             │
+├─────────────────────────────────────────────────────────────────┤
+│                      GAME CONTROLLER                             │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │  State Machine: LOBBY → EXPLORING → VENUE → PLAYING →   │  │
+│  │  PAUSED → GAMEOVER → (return to EXPLORING)              │  │
+│  └───────────────────────────────────────────────────────────┘  │
+├─────────────────────────────────────────────────────────────────┤
+│                      WORLD SYSTEM                                │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────────┐  │
+│  │ Scene    │  │ Lighting │  │ Physics  │  │ Environment  │  │
+│  │ Manager  │  │ System   │  │ World    │  │ Manager      │  │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────────┘  │
+├─────────────────────────────────────────────────────────────────┤
+│                     ENTITY SYSTEM                                │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────────┐  │
+│  │ Player   │  │ NPCs      │  │ Venues   │  │ Interactive  │  │
+│  │ Controller│ │ Manager  │  │ Manager  │  │ Objects      │  │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────────┘  │
+├─────────────────────────────────────────────────────────────────┤
+│                    GAME MODULES                                  │
+│  ┌────────────┐  ┌────────────┐  ┌────────────┐               │
+│  │ Sky Ace    │  │ [Future]   │  │ [Future]   │               │
+│  │ (Flight)   │  │ Game 2     │  │ Game 3     │               │
+│  └────────────┘  └────────────┘  └────────────┘               │
+├─────────────────────────────────────────────────────────────────┤
+│                    RENDERER LAYER                                │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │ Three.js WebGL Renderer + Post-Processing Pipeline      │  │
+│  │ (Bloom, Fog, Color Grading, FXAA)                       │  │
+│  └─────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+    </div>
+
+    <h3>2.3 Module System</h3>
+    <p>
+        All game logic is organized into ES6 modules. Each major system is a self-contained module with clear 
+        input/output interfaces. The <code>GameController</code> acts as the central orchestrator.
+    </p>
+
+    <div class="info">
+        <strong>Key Principle:</strong> Each game module (Sky Ace, etc.) is completely self-contained. 
+        It receives a Three.js scene, camera, and renderer from the platform, but manages its own game loop, 
+        input, and state. When the player exits, the module cleans up all its resources.
+    </div>
+
+    <h2><span class="section-number">3</span> Project File Structure</h2>
+
+    <h3>3.1 Directory Structure</h3>
+    <pre><code>neon-city-arcade/
+├── docs/                          # Documentation (this file lives here)
+├── src/
+│   ├── main.js                    # Entry point, initializes GameController
+│   ├── core/
+│   │   ├── GameController.js      # Central orchestrator, state machine
+│   │   ├── SceneManager.js        # Three.js scene lifecycle
+│   │   ├── Renderer.js            # WebGL renderer + post-processing setup
+│   │   ├── PhysicsWorld.js        # Cannon-es physics world management
+│   │   ├── AssetLoader.js         # GLTF, texture, audio loading
+│   │   ├── EventBus.js            # Pub/sub for decoupled communication
+│   │   └── InputManager.js        # Keyboard, mouse, touch input abstraction
+│   ├── world/
+│   │   ├── CityStreet.js          # Main street scene composition
+│   │   ├── Building.js            # Building base class
+│   │   ├── StreetProps.js         # Lamps, benches, trash cans, etc.
+│   │   ├── Environment.js         # Sky, fog, particles, weather
+│   │   └── Lighting.js            # Day/night cycle, neon lights, street lamps
+│   ├── entities/
+│   │   ├── Player.js              # Player avatar controller
+│   │   ├── PlayerController.js    # Input → movement mapping
+│   │   ├── NPC.js                 # NPC base class
+│   │   ├── NPCManager.js          # Spawns, schedules, behaviors
+│   │   ├── NPCBehavior.js         # Behavior trees/FSMs for AI
+│   │   └── Interactable.js        # Base class for interactable objects
+│   ├── venues/
+│   │   ├── Venue.js               # Base class for all game venues
+│   │   ├── VenueManager.js        # Handles venue discovery, entry, exit
+│   │   ├── SkyAceVenue.js         # Sky Ace venue exterior/interior
+│   │   └── [FutureVenues]/        # Directory per future venue
+│   ├── games/
+│   │   ├── GameBase.js            # Abstract base class for all games
+│   │   ├── sky-ace/
+│   │   │   ├── SkyAceGame.js      # Main game class
+│   │   │   ├── Aircraft.js        # Player aircraft
+│   │   │   ├── Enemy.js           # Enemy aircraft
+│   │   │   ├── Projectile.js      # Bullets, missiles
+│   │   │   ├── SkyEnvironment.js  # Clouds, terrain, skybox
+│   │   │   ├── HUD.js             # In-game HUD
+│   │   │   └── assets/            # Game-specific assets
+│   │   └── [FutureGames]/         # Directory per future game
+│   ├── ui/
+│   │   ├── UIManager.js           # Manages all UI screens
+│   │   ├── MainMenu.js            # Title screen, settings
+│   │   ├── PauseMenu.js           # Pause overlay
+│   │   ├── HUD.js                 # Exploration HUD (minimap, etc.)
+│   │   └── Dialog.js              # NPC conversation dialogs
+│   ├── utils/
+│   │   ├── MathUtils.js           # Vector math helpers
+│   │   ├── Noise.js               # Simplex noise for procedural generation
+│   │   ├── Storage.js             # localStorage/IndexedDB wrapper
+│   │   └── Logger.js              # Debug logging utility
+│   └── constants/
+│       ├── Config.js              # Global constants, tuning values
+│       ├── Colors.js              # Brand color palette
+│       └── Keys.js                # Input key mappings
+├── assets/
+│   ├── models/                    # .glb / .gltf 3D models
+│   │   ├── characters/
+│   │   ├── buildings/
+│   │   ├── props/
+│   │   └── vehicles/
+│   ├── textures/                  # .png / .jpg / .webp textures
+│   │   ├── buildings/
+│   │   ├── environment/
+│   │   └── ui/
+│   ├── audio/                     # .mp3 / .ogg audio files
+│   │   ├── music/
+│   │   └── sfx/
+│   └── fonts/                     # Custom web fonts
+├── shaders/                       # Custom GLSL shaders
+│   ├── vertex/                    # Vertex shaders
+│   └── fragment/                  # Fragment shaders
+├── styles/
+│   └── main.css                   # Global styles, UI component styles
+├── index.html                     # Main HTML entry
+├── vite.config.js                 # Vite configuration
+├── package.json                   # Dependencies
+└── .gitignore                     # Git ignore rules
+    </code></pre>
+
+    <h3>3.2 File Naming Conventions</h3>
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Convention</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td>JavaScript Classes</td>
+            <td>PascalCase</td>
+            <td><code>GameController.js</code></td>
+        </tr>
+        <tr>
+            <td>JavaScript Functions</td>
+            <td>camelCase</td>
+            <td><code>loadAssets.js</code></td>
+        </tr>
+        <tr>
+            <td>Constants</td>
+            <td>UPPER_SNAKE_CASE</td>
+            <td><code>MAX_NPC_COUNT</code></td>
+        </tr>
+        <tr>
+            <td>CSS Classes</td>
+            <td>kebab-case</td>
+            <td><code>ui-overlay</code></td>
+        </tr>
+        <tr>
+            <td>3D Models</td>
+            <td>kebab-case</td>
+            <td><code>player-avatar.glb</code></td>
+        </tr>
+        <tr>
+            <td>Textures</td>
+            <td>kebab-case + suffix</td>
+            <td><code>building-albedo.png</code></td>
+        </tr>
+        <tr>
+            <td>Audio</td>
+            <td>kebab-case</td>
+            <td><code>engine-thrusters.mp3</code></td>
+        </tr>
+    </table>
+
+    <h2><span class="section-number">4</span> Development Conventions & Standards</h2>
+
+    <h3>4.1 Code Style</h3>
+    <ul>
+        <li><strong>Language:</strong> ES6+ JavaScript (no TypeScript for Phase 1, migration planned)</li>
+        <li><strong>Module System:</strong> ES6 modules with import/export</li>
+        <li><strong>Semicolons:</strong> Required</li>
+        <li><strong>Quotes:</strong> Single quotes for strings</li>
+        <li><strong>Indentation:</strong> 2 spaces (no tabs)</li>
+        <li><strong>Line Length:</strong> Max 100 characters</li>
+        <li><strong>Trailing Commas:</strong> Required in multi-line objects/arrays</li>
+    </ul>
+
+    <h3>4.2 Class Structure</h3>
+    <pre><code>/**
+ * Brief description of the class.
+ * Longer description if needed.
+ */
+class MyClass {
+  /**
+   * @param {Type} paramName - Description
+   */
+  constructor(paramName) {
+    // Initialize properties
+    this.paramName = paramName;
+    
+    // Bind methods that need 'this' context
+    this.update = this.update.bind(this);
+  }
+  
+  /**
+   * Brief description of the method.
+   * @param {number} deltaTime - Time since last frame in seconds
+   * @returns {boolean} Success state
+   */
+  update(deltaTime) {
+    // Implementation
+    return true;
+  }
+  
+  /**
+   * Clean up resources when object is destroyed.
+   */
+  dispose() {
+    // Remove event listeners
+    // Dispose Three.js objects
+    // Null references
+  }
+}
+
+export { MyClass };
+    </code></pre>
+
+    <h3>4.3 Memory Management</h3>
+    <div class="warning">
+        <strong>CRITICAL:</strong> All classes that create Three.js objects (meshes, materials, textures, 
+        geometries) MUST implement a <code>dispose()</code> method. Call this when transitioning between 
+        states (e.g., leaving a game venue). Failure to dispose resources will cause memory leaks and 
+        crash the browser.
+    </div>
+
+    <h3>4.4 Performance Rules</h3>
+    <ol>
+        <li><strong>Geometry Reuse:</strong> Use <code>InstancedMesh</code> for repeated objects (street lamps, trees, etc.)</li>
+        <li><strong>Texture Sizes:</strong> Max 2048x2048 for hero assets, 512x512 for props, 256x256 for UI</li>
+        <li><strong>Draw Calls:</strong> Target under 200 draw calls for the street scene</li>
+        <li><strong>Shadows:</strong> Use baked lighting where possible. Real-time shadows only for player + key objects</li>
+        <li><strong>LOD System:</strong> Implement Level of Detail for all models (3 levels minimum)</li>
+        <li><strong>Update Loop:</strong> Use <code>requestAnimationFrame</code>. Skip updates for off-screen objects</li>
+        <li><strong>Physics:</strong> Limit physics bodies to visible area + small buffer</li>
+    </ol>
+
+    <h3>4.5 Git Workflow</h3>
+    <table>
+        <tr>
+            <th>Branch</th>
+            <th>Purpose</th>
+            <th>Rules</th>
+        </tr>
+        <tr>
+            <td><code>main</code></td>
+            <td>Production-ready code</td>
+            <td>Only merge via PR, requires review</td>
+        </tr>
+        <tr>
+            <td><code>develop</code></td>
+            <td>Integration branch</td>
+            <td>Feature branches merge here</td>
+        </tr>
+        <tr>
+            <td><code>feature/*</code></td>
+            <td>New features</td>
+            <td>Branch from develop, merge back via PR</td>
+        </tr>
+        <tr>
+            <td><code>bugfix/*</code></td>
+            <td>Bug fixes</td>
+            <td>Branch from develop, merge back via PR</td>
+        </tr>
+        <tr>
+            <td><code>hotfix/*</code></td>
+            <td>Critical production fixes</td>
+            <td>Branch from main, merge to main + develop</td>
+        </tr>
+    </table>
+
+    <h3>4.6 Commit Message Format</h3>
+    <pre><code>&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+
+&lt;body&gt;
+
+&lt;footer&gt;</code></pre>
+    <p><strong>Types:</strong> <code>feat</code> (feature), <code>fix</code> (bug fix), <code>docs</code> (documentation), <code>style</code> (formatting), <code>refactor</code>, <code>perf</code> (performance), <code>test</code>, <code>chore</code> (maintenance)</p>
+    <p><strong>Scopes:</strong> <code>world</code>, <code>player</code>, <code>npc</code>, <code>venue</code>, <code>sky-ace</code>, <code>ui</code>, <code>assets</code>, <code>core</code></p>
+    <p><strong>Example:</strong> <code>feat(player): add double-jump ability with particle effects</code></p>
+
+    <h2><span class="section-number">5</span> World Design: Neon City Street</h2>
+
+    <h3>5.1 Overview</h3>
+    <p>
+        The entire initial experience takes place on a single city street, approximately <strong>200 meters long</strong> 
+        and <strong>40 meters wide</strong>. The street runs East-West with buildings on both sides. 
+        Players can walk freely but are bounded by invisible walls at the ends and building walls on the sides.
+    </p>
+
+    <h3>5.2 Street Layout (Top-Down View)</h3>
+    <div class="architecture-diagram">
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                               BOUNDARY (Invisible Wall)                      │
+│  ┌───────────────────────────────────────────────────────────────────────┐   │
+│  │                         NORTH BUILDINGS                              │   │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐  │   │
+│  │  │ Sky Ace  │  │    ??    │  │    ??    │  │    ??    │  │  Park  │  │   │
+│  │  │ (Flight) │  │ (Future) │  │ (Future) │  │ (Future) │  │ (Chill)│  │   │
+│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘  └────────┘  │   │
+│  │     [E]         [E]          [E]          [E]           [Open]     │   │
+│  └───────────────────────────────────────────────────────────────────────┘   │
+│                                                                             │
+│  ←═══ WEST SIDEWALK ════→  ←═══ 8m STREET ════→  ←═══ EAST SIDEWALK ════→  │
+│                                                                             │
+│  ┌───────────────────────────────────────────────────────────────────────┐   │
+│  │                         SOUTH BUILDINGS                              │   │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐  │   │
+│  │  │  Cafe    │  │  Shop    │  │    ??    │  │    ??    │  │  Beach │  │   │
+│  │  │ (Social) │  │ (Custom) │  │ (Future) │  │ (Future) │  │ (View) │  │   │
+│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘  └────────┘  │   │
+│  │     [E]         [E]          [E]          [E]           [Open]     │   │
+│  └───────────────────────────────────────────────────────────────────────┘   │
+│                               BOUNDARY (Invisible Wall)                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+[E] = Press E to Enter
+    </div>
+
+    <h3>5.3 Key Locations</h3>
+    <table>
+        <tr>
+            <th>Location</th>
+            <th>Side</th>
+            <th>Type</th>
+            <th>Function</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>Sky Ace HQ</td>
+            <td>North</td>
+            <td>Venue</td>
+            <td>Flight combat game entrance</td>
+            <td class="priority-high">Phase 1</td>
+        </tr>
+        <tr>
+            <td>Neon Cafe</td>
+            <td>South</td>
+            <td>Social</td>
+            <td>NPC gathering, lore, casual interactions</td>
+            <td class="priority-medium">Phase 1</td>
+        </tr>
+        <tr>
+            <td>Vaporwave Shop</td>
+            <td>South</td>
+            <td>Customization</td>
+            <td>Avatar customization, items, collectibles</td>
+            <td class="priority-medium">Phase 2</td>
+        </tr>
+        <tr>
+            <td>Beach Access</td>
+            <td>South (end)</td>
+            <td>View</td>
+            <td>Ocean view, relaxation area, photo spot</td>
+            <td class="priority-low">Phase 2</td>
+        </tr>
+        <tr>
+            <td>Park Plaza</td>
+            <td>North (end)</td>
+            <td>Open</td>
+            <td>Bench, fountain, street performers</td>
+            <td class="priority-medium">Phase 1</td>
+        </tr>
+        <tr>
+            <td>[Locked Building]</td>
+            <td>Both</td>
+            <td>Future</td>
+            <td>Visual placeholder for future venues</td>
+            <td class="priority-low">Phase 3+</td>
+        </tr>
+    </table>
+
+    <h3>5.4 Environment Details</h3>
+    <h4>Lighting</h4>
+    <ul>
+        <li><strong>Time of Day:</strong> Permanent sunset (golden hour) for initial release</li>
+        <li><strong>Ambient Light:</strong> Warm orange (#ff9966) at intensity 0.6</li>
+        <li><strong>Directional Light:</strong> Low angle, casting long shadows, simulating setting sun</li>
+        <li><strong>Street Lamps:</strong> Point lights with warm glow, turn on as natural light fades</li>
+        <li><strong>Neon Signs:</strong> Emissive materials with bloom post-processing</li>
+        <li><strong>Building Windows:</strong> Random emissive rectangles, simulated interior lighting</li>
+    </ul>
+
+    <h4>Atmosphere</h4>
+    <ul>
+        <li><strong>Fog:</strong> Exponential fog, density 0.015, color matches sunset sky</li>
+        <li><strong>Particles:</strong> Floating dust motes (very subtle), occasional neon-colored confetti near venues</li>
+        <li><strong>Skybox:</strong> Gradient dome from deep purple (top) to hot orange (horizon)</li>
+        <li><strong>Reflections:</strong> Wet street surface with subtle reflections (normal map + roughness)</li>
+    </ul>
+
+    <h4>Street Props</h4>
+    <ul>
+        <li>Palm trees (instanced, 8-12 along the street)</li>
+        <li>Street lamps (instanced, every 20 meters)</li>
+        <li>Park benches (3-4 total)</li>
+        <li>Trash cans, newspaper stands, potted plants</li>
+        <li>Neon signs above venues (unique per venue)</li>
+        <li>Crosswalk markings, manhole covers, street cracks</li>
+    </ul>
+
+    <h3>5.5 Performance Budget</h3>
+    <table>
+        <tr>
+            <th>Metric</th>
+            <th>Budget</th>
+            <th>Notes</th>
+        </tr>
+        <tr>
+            <td>Triangles (street scene)</td>
+            <td>50,000</td>
+            <td>Includes buildings, props, terrain</td>
+        </tr>
+        <tr>
+            <td>Draw Calls</td>
+            <td>150</td>
+            <td>Target with instancing</td>
+        </tr>
+        <tr>
+            <td>Texture Memory</td>
+            <td>64 MB</td>
+            <td>Compressed textures preferred</td>
+        </tr>
+        <tr>
+            <td>Physics Bodies</td>
+            <td>100</td>
+            <td>Player + collidables + NPCs</td>
+        </tr>
+        <tr>
+            <td>Active Lights</td>
+            <td>20</td>
+            <td>Include shadows for 4 key lights</td>
+        </tr>
+    </table>
+
+    <h2><span class="section-number">6</span> Player Character System</h2>
+
+    <h3>6.1 Character Design</h3>
+    <ul>
+        <li><strong>Style:</strong> Low-poly cartoonish humanoid</li>
+        <li><strong>Poly Count:</strong> 1,500 triangles maximum</li>
+        <li><strong>Height:</strong> 1.7 units (meters) in world space</li>
+        <li><strong>Colors:</strong> Customizable (Phase 2). Default: white shirt, blue jeans, sneakers</li>
+        <li><strong>Animation:</strong> Simple rig with idle, walk, run, interact animations</li>
+    </ul>
+
+    <h3>6.2 Controls (Exploration Mode)</h3>
+    <table>
+        <tr>
+            <th>Input</th>
+            <th>Action</th>
+            <th>Notes</th>
+        </tr>
+        <tr>
+            <td><code>W / Up Arrow</code></td>
+            <td>Walk Forward</td>
+            <td>Hold to move</td>
+        </tr>
+        <tr>
+            <td><code>S / Down Arrow</code></td>
+            <td>Walk Backward</td>
+            <td>Slower than forward</td>
+        </tr>
+        <tr>
+            <td><code>A / Left Arrow</code></td>
+            <td>Strafe Left</td>
+            <td>Or rotate left (toggle in settings)</td>
+        </tr>
+        <tr>
+            <td><code>D / Right Arrow</code></td>
+            <td>Strafe Right</td>
+            <td>Or rotate right (toggle in settings)</td>
+        </tr>
+        <tr>
+            <td><code>Mouse Move</code></td>
+            <td>Camera Orbit</td>
+            <td>Third-person camera rotates around player</td>
+        </tr>
+        <tr>
+            <td><code>Mouse Wheel</code></td>
+            <td>Zoom In/Out</td>
+            <td>Range: 3m to 12m distance</td>
+        </tr>
+        <tr>
+            <td><code>E</code></td>
+            <td>Interact</td>
+            <td>Enter venue, talk to NPC, use object</td>
+        </tr>
+        <tr>
+            <td><code>Shift</code></td>
+            <td>Run</td>
+            <td>1.5x movement speed while held</td>
+        </tr>
+        <tr>
+            <td><code>Space</code></td>
+            <td>Jump</td>
+            <td>Small hop (0.5m height), for fun</td>
+        </tr>
+        <tr>
+            <td><code>Esc</code></td>
+            <td>Pause Menu</td>
+            <td>Opens pause overlay</td>
+        </tr>
+    </table>
+
+    <h3>6.3 Camera System</h3>
+    <p><strong>Mode:</strong> Third-person follow camera (primary), with optional first-person toggle.</p>
+    <ul>
+        <li><strong>Default Distance:</strong> 6 meters behind player</li>
+        <li><strong>Height Offset:</strong> 2 meters above player</li>
+        <li><strong>Look Target:</strong> Player head height (1.6m)</li>
+        <li><strong>Smoothing:</strong> Camera follows with 0.1s lag (smooth damping)</li>
+        <li><strong>Collision:</strong> Camera raycasts to avoid clipping through buildings. If blocked, moves closer to player</li>
+        <li><strong>FOV:</strong> 60 degrees (configurable in settings)</li>
+    </ul>
+
+    <h3>6.4 Player State</h3>
+    <pre><code>playerState = {
+  position: { x: 0, y: 0, z: 0 },     // World position
+  rotation: { y: 0 },                    // Y-axis rotation (facing direction)
+  velocity: { x: 0, y: 0, z: 0 },        // Current velocity
+  isMoving: false,                       // Is player currently moving?
+  isRunning: false,                      // Is shift held?
+  isGrounded: true,                      // Is player on ground?
+  currentVenue: null,                    // Which venue player is in (null = exploring)
+  selectedAvatar: 'default',             // Current avatar customization
+  inventory: [],                        // Collected items (Phase 2)
+  stats: {
+    totalPlayTime: 0,                   // Total seconds played
+    gamesCompleted: 0,                  // Number of games finished
+    highScores: {},                     // Per-game high scores
+    achievements: []                    // Unlocked achievements (Phase 2)
+  }
+};
+    </code></pre>
+
+    <h2><span class="section-number">7</span> AI NPC System</h2>
+
+    <h3>7.1 Overview</h3>
+    <p>
+        The street feels alive through AI-controlled NPCs (Non-Player Characters). They walk around, 
+        enter/exit buildings, gather in groups, and can be interacted with by the player. 
+        <strong>Phase 1 targets 8-12 active NPCs</strong> at any time, with plans to scale to 30+ in multiplayer.
+    </p>
+
+    <h3>7.2 NPC Design</h3>
+    <ul>
+        <li><strong>Style:</strong> Low-poly cartoonish, same aesthetic as player but distinct silhouettes</li>
+        <li><strong>Variations:</strong> 6 unique base models (3 male, 3 female) with color/material variations</li>
+        <li><strong>Poly Count:</strong> 1,200 triangles each (slightly simpler than player)</li>
+        <li><strong>Animations:</strong> Idle, walk, talk, celebrate (4 animations minimum)</li>
+    </ul>
+
+    <h3>7.3 NPC Behaviors</h3>
+    <p>NPCs use a simple state machine with the following states:</p>
+    <table>
+        <tr>
+            <th>State</th>
+            <th>Description</th>
+            <th>Duration</th>
+        </tr>
+        <tr>
+            <td><code>IDLE</code></td>
+            <td>Standing still, occasional idle animation</td>
+            <td>10-30s</td>
+        </tr>
+        <tr>
+            <td><code>WALKING</code></td>
+            <td>Moving to a destination point</td>
+            <td>Variable</td>
+        </tr>
+        <tr>
+            <td><code>TALKING</code></td>
+            <td>In conversation with player or another NPC</td>
+            <td>Until interaction ends</td>
+        </tr>
+        <tr>
+            <td><code>INTERACTING</code></td>
+            <td>Using an object (bench, shop window, etc.)</td>
+            <td>15-45s</td>
+        </tr>
+        <tr>
+            <td><code>ENTERING_BUILDING</code></td>
+            <td>Walking into a venue (disappears from street)</td>
+            <td>2-3s</td>
+        </tr>
+        <tr>
+            <td><code>EXITING_BUILDING</code></td>
+            <td>Walking out of a venue (appears on street)</td>
+            <td>2-3s</td>
+        </tr>
+    </table>
+
+    <h3>7.4 Behavior Scheduling</h3>
+    <p>Each NPC has a daily schedule (loosely defined, loops every 10 minutes of real time):</p>
+    <pre><code>npcSchedule = {
+  // Time is in seconds (0-600 = one cycle)
+  schedule: [
+    { time: 0,    action: 'EXIT_BUILDING', target: 'neon_cafe' },
+    { time: 60,   action: 'WALK_TO',       target: 'park_bench_1' },
+    { time: 120,  action: 'IDLE',          duration: 30 },
+    { time: 150,  action: 'WALK_TO',       target: 'sky_ace_entrance' },
+    { time: 210,  action: 'INTERACT',      target: 'shop_window' },
+    { time: 270,  action: 'WALK_TO',       target: 'random_waypoint' },
+    { time: 330,  action: 'TALK',          target: 'nearest_npc' },
+    { time: 390,  action: 'WALK_TO',       target: 'neon_cafe' },
+    { time: 450,  action: 'ENTER_BUILDING', target: 'neon_cafe' },
+    { time: 600,  action: 'LOOP' }
+  ]
+};
+    </code></pre>
+
+    <h3>7.5 NPC Interactions</h3>
+    <p>When player approaches an NPC and presses <code>E</code>:</p>
+    <ol>
+        <li>NPC stops and faces player</li>
+        <li>Dialog box appears with NPC name + greeting</li>
+        <li>Player can select from 1-3 conversation options</li>
+        <li>Options may include:
+            <ul>
+                <li>"What's happening around here?" (Lore/world building)</li>
+                <li>"How do I play [game]?" (Tutorial hints)</li>
+                <li>"See you around!" (End conversation)</li>
+            </ul>
+        </li>
+        <li>Some NPCs give quests or hints about secrets (Phase 2)</li>
+    </ol>
+
+    <h3>7.6 NPC Dialogue System</h3>
+    <p>Dialogue is stored in JSON files per NPC:</p>
+    <pre><code>{
+  "npcId": "npc_veteran_pilot",
+  "name": "Ace",
+  "role": "Former Sky Ace champion",
+  "location": "sky_ace_entrance",
+  "dialogueTree": {
+    "greeting": "Hey there, rookie! Looking to take to the skies?",
+    "options": [
+      {
+        "text": "How do I play Sky Ace?",
+        "response": "Simple! Fly with WASD, shoot with SPACE. Take down enemies and don't crash!",
+        "leadsTo": ["tips_option", "goodbye_option"]
+      },
+      {
+        "text": "Any tips for a beginner?",
+        "response": "Stay mobile! The best pilots never stay still. And watch your six!",
+        "leadsTo": ["goodbye_option"]
+      },
+      {
+        "text": "See you around!",
+        "response": "Good luck up there, kid!",
+        "leadsTo": null
+      }
+    ]
+  }
+}
+    </code></pre>
+
+    <h2><span class="section-number">8</span> Game Modules</h2>
+
+    <h3>8.1 Game Base Class</h3>
+    <p>All games must extend the <code>GameBase</code> class and implement the following interface:</p>
+    <pre><code>class GameBase {
+  constructor(gameController, venueData) {
+    this.gameController = gameController;
+    this.venueData = venueData;
+    this.isRunning = false;
+    this.score = 0;
+    this.gameTime = 0;
+  }
+
+  // Called when player enters the venue
+  async init() {
+    // Load game-specific assets
+    // Initialize game scene
+    // Set up game-specific input
+  }
+
+  // Called every frame when game is active
+  update(deltaTime) {
+    // Game logic, physics, AI
+  }
+
+  // Called every frame for rendering (if game needs custom render loop)
+  render() {
+    // Optional: override default rendering
+  }
+
+  // Called when player pauses
+  pause() {
+    this.isRunning = false;
+  }
+
+  // Called when player unpauses
+  resume() {
+    this.isRunning = true;
+  }
+
+  // Called when player exits the venue (MUST dispose all resources)
+  dispose() {
+    // Dispose geometries, materials, textures
+    // Remove event listeners
+    // Clean up physics bodies
+    // Reset scene
+  }
+
+  // Called when game ends (win/lose/quit)
+  endGame(result) {
+    // Save high score
+    // Show results screen
+    // Return to venue interior or street
+  }
+}
+    </code></pre>
+
+    <h3>8.2 Venue System</h3>
+    <p>Each venue has two states:</p>
+    <ul>
+        <li><strong>Exterior:</strong> Part of the street scene. Player can walk up and press E to enter</li>
+        <li><strong>Interior:</strong> Separate scene loaded when player enters. Contains game-specific environment</li>
+    </ul>
+    <p>Venue transition flow:</p>
+    <pre><code>Player approaches venue exterior
+       ↓
+Press E when within 3 meters of entrance
+       ↓
+Screen fades to black (0.5s)
+       ↓
+Street scene pauses, venue interior scene loads
+       ↓
+Camera animates to starting position
+       ↓
+Screen fades in (0.5s)
+       ↓
+Game begins / Player is in venue lobby
+       ↓
+[Play game / Explore venue]
+       ↓
+Press Esc or select "Exit"
+       ↓
+Screen fades to black
+       ↓
+Venue disposes, street scene resumes
+       ↓
+Player appears at venue entrance
+       ↓
+Screen fades in</pre>
+
+    <h3>8.3 Asset Sharing</h3>
+    <div class="info">
+        <strong>Optimization:</strong> The GameController maintains an asset cache. When a game requests 
+        an asset, it's loaded once and reused. Games should NOT load the same assets independently. 
+        Use <code>AssetLoader.get('path/to/asset')</code> which returns cached instances.
+    </div>
+
+    <h2><span class="section-number">9</span> Game 1: Sky Ace (Flight Combat)</h2>
+
+    <h3>9.1 Game Overview</h3>
+    <p>
+        <strong>Sky Ace</strong> is an Ace Combat-inspired aerial combat game. Players pilot a stylized 
+        fighter jet through arcade-style missions, shooting down enemy aircraft and completing objectives. 
+        The game is accessible (simple controls) but rewards skill (advanced maneuvers, chain combos).
+    </p>
+
+    <h3>9.2 Game Flow</h3>
+    <ol>
+        <li><strong>Briefing Room:</strong> Player enters Sky Ace HQ venue interior. Briefing screen shows mission details</li>
+        <li><strong>Hangar:</strong> Player selects aircraft (1 available in Phase 1, 3+ in future)</li>
+        <li><strong>Launch:</strong> Aircraft takes off from runway, transitions to gameplay</li>
+        <li><strong>Gameplay:</strong> Aerial combat mission (2-5 minutes)</li>
+        <li><strong>Debrief:</strong> Score screen with stats, high score comparison, rewards</li>
+        <li><strong>Return:</strong> Player exits back to venue interior or street</li>
+    </ol>
+
+    <h3>9.3 Controls</h3>
+    <table>
+        <tr>
+            <th>Input</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td><code>W / Up Arrow</code></td>
+            <td>Pitch Down (dive)</td>
+        </tr>
+        <tr>
+            <td><code>S / Down Arrow</code></td>
+            <td>Pitch Up (climb)</td>
+        </tr>
+        <tr>
+            <td><code>A / Left Arrow</code></td>
+            <td>Roll Left + Turn Left</td>
+        </tr>
+        <tr>
+            <td><code>D / Right Arrow</code></td>
+            <td>Roll Right + Turn Right</td>
+        </tr>
+        <tr>
+            <td><code>Space</code></td>
+            <td>Fire Machine Guns</td>
+        </tr>
+        <tr>
+            <td><code>E / Shift</code></td>
+            <td>Fire Missile (limited ammo, lock-on required)</td>
+        </tr>
+        <tr>
+            <td><code>Shift</code></td>
+            <td>Boost (temporary speed increase, overheats)</td>
+        </tr>
+        <tr>
+            <td><code>C</code></td>
+            <td>Change Camera (Cockpit / Chase / Cinematic)</td>
+        </tr>
+        <tr>
+            <td><code>Esc</code></td>
+            <td>Pause Menu</td>
+        </tr>
+    </table>
+
+    <h3>9.4 Flight Mechanics</h3>
+    <ul>
+        <li><strong>Physics:</strong> Arcade-style (not realistic flight sim). Momentum-based with generous turning</li>
+        <li><strong>Speed Range:</strong> 200-800 km/h (scaled to game world)</li>
+        <li><strong>Altitude:</strong> Minimum 50m (ground), maximum 3,000m (ceiling)</li>
+        <li><strong>Stall:</strong> No stall mechanic (arcade accessibility)</li>
+        <li><strong>Boost:</strong> 1.5x speed for 3 seconds, 5-second cooldown</li>
+        <li><strong>Health:</strong> Aircraft has 100 HP. Collisions with ground = instant death</li>
+    </ul>
+
+    <h3>9.5 Mission Structure (Phase 1)</h3>
+    <p><strong>Mission 1: "First Flight"</strong> - Tutorial / Training</p>
+    <ul>
+        <li>Objective: Destroy 5 training drones</li>
+        <li>Time Limit: 3 minutes</li>
+        <li>Enemies: Static drones (no AI, easy targets)</li>
+        <li>Rewards: Bronze/Silver/Gold medal based on time</li>
+    </ul>
+
+    <p><strong>Mission 2: "Neon Skies"</strong> - First Real Combat</p>
+    <ul>
+        <li>Objective: Destroy 10 enemy fighters</li>
+        <li>Time Limit: 5 minutes</li>
+        <li>Enemies: Basic AI (follow player, shoot occasionally)</li>
+        <li>Environment: City at night with neon lights</li>
+    </ul>
+
+    <p><strong>Mission 3: "Ace in the Hole"</strong> - Boss Battle</p>
+    <ul>
+        <li>Objective: Defeat Ace-class enemy squadron (3 elite enemies)</li>
+        <li>Time Limit: 5 minutes</li>
+        <li>Enemies: Advanced AI (evasive maneuvers, team tactics)</li>
+        <li>Environment: Coastal sunset</li>
+    </ul>
+
+    <h3>9.6 Scoring System</h3>
+    <table>
+        <tr>
+            <th>Action</th>
+            <th>Points</th>
+        </tr>
+        <tr>
+            <td>Destroy drone</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>Destroy fighter</td>
+            <td>500</td>
+        </tr>
+        <tr>
+            <td>Destroy Ace</td>
+            <td>2,000</td>
+        </tr>
+        <tr>
+            <td>Missile hit</td>
+            <td>+50% bonus</td>
+        </tr>
+        <tr>
+            <td>Chain kill (within 5s)</td>
+            <td>x2 multiplier per kill</td>
+        </tr>
+        <tr>
+            <td>No damage taken</td>
+            <td>+5,000 bonus</td>
+        </tr>
+        <tr>
+            <td>Time bonus</td>
+            <td>+10 points per second remaining</td>
+        </tr>
+    </table>
+
+    <h3>9.7 Visual Design</h3>
+    <ul>
+        <li><strong>Aircraft Style:</strong> Stylized fighter jets, low-poly (3,000 triangles), cartoonish proportions</li>
+        <li><strong>Environment:</strong> Floating islands, neon-lit city, clouds, ocean</li>
+        <li><strong>Skybox:</strong> Dynamic sunset with gradient colors matching street aesthetic</li>
+        <li><strong>Effects:</strong>
+            <ul>
+                <li>Engine trails (particle system)</li>
+                <li>Muzzle flashes (point lights + sprites)</li>
+                <li>Explosions (particle burst + screen shake)</li>
+                <li>Contrails (ribbon geometry)</li>
+                <li>Speed lines (post-processing effect when boosting)</li>
+            </ul>
+        </li>
+        <li><strong>HUD:</strong>
+            <ul>
+                <li>Speed indicator (analog gauge style)</li>
+                <li>Altitude indicator</li>
+                <li>Health bar (shield-style)</li>
+                <li>Weapon status (machine gun heat, missile count)</li>
+                <li>Radar/minimap (top-down view of area)</li>
+                <li>Score + combo counter</li>
+                <li>Lock-on reticle (appears when missile can lock)</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>9.8 Audio Design</h3>
+    <ul>
+        <li><strong>Engine:</strong> Continuous jet roar, pitch shifts with speed</li>
+        <li><strong>Guns:</strong> Rapid-fire pew-pew (arcade style, not realistic)</li>
+        <li><strong>Missiles:</strong> Launch whoosh, lock-on beep</li>
+        <li><strong>Explosions:</strong> Satisfying boom with bass</li>
+        <li><strong>Music:</strong> Synthwave/electronic, high energy, 120-140 BPM</li>
+        <li><strong>Voice:</strong> Radio chatter (text-to-speech or recorded lines)</li>
+    </ul>
+
+    <h2><span class="section-number">10</span> Art Style & Asset Guidelines</h2>
+
+    <h3>10.1 Core Aesthetic</h3>
+    <p><strong>Style:</strong> Stylized Cartoonish / Low-Poly with Neon Accents</p>
+    <ul>
+        <li><strong>Inspiration:</strong> Miami Vice + Saturday morning cartoons + modern low-poly indie games</li>
+        <li><strong>Mood:</strong> Fun, vibrant, approachable, slightly retro-futuristic</li>
+        <li><strong>Complexity:</strong> Simple shapes, bold colors, clean silhouettes</li>
+    </ul>
+
+    <h3>10.2 Color Palette</h3>
+    <table>
+        <tr>
+            <th>Usage</th>
+            <th>Hex</th>
+            <th>Name</th>
+        </tr>
+        <tr>
+            <td>Primary Brand</td>
+            <td>#FF6B9D</td>
+            <td>Neon Pink</td>
+        </tr>
+        <tr>
+            <td>Secondary Brand</td>
+            <td>#4ECDC4</td>
+            <td>Teal</td>
+        </tr>
+        <tr>
+            <td>Accent</td>
+            <td>#FFE66D</td>
+            <td>Sunny Yellow</td>
+        </tr>
+        <tr>
+            <td>Background</td>
+            <td>#0E0F13</td>
+            <td>Dark Navy</td>
+        </tr>
+        <tr>
+            <td>Sky Top</td>
+            <td>#6B5B95</td>
+            <td>Purple</td>
+        </tr>
+        <tr>
+            <td>Sky Horizon</td>
+            <td>#FF9966</td>
+            <td>Orange</td>
+        </tr>
+        <tr>
+            <td>Building Primary</td>
+            <td>#F7FFF7</td>
+            <td>Off-White</td>
+        </tr>
+        <tr>
+            <td>Building Accent</td>
+            <td>#2EC4B6</td>
+            <td>Seafoam</td>
+        </tr>
+        <tr>
+            <td>Street</td>
+            <td>#2D3436</td>
+            <td>Dark Gray</td>
+        </tr>
+        <tr>
+            <td>Success</td>
+            <td>#00B894</td>
+            <td>Green</td>
+        </tr>
+        <tr>
+            <td>Warning</td>
+            <td>#FDCB6E</td>
+            <td>Yellow</td>
+        </tr>
+        <tr>
+            <td>Error</td>
+            <td>#FF7675</td>
+            <td>Red</td>
+        </tr>
+    </table>
+
+    <h3>10.3 Modeling Guidelines</h3>
+    <ul>
+        <li><strong>Software:</strong> Blender (primary), Maya/3ds Max acceptable</li>
+        <li><strong>Export Format:</strong> GLB (binary GLTF) with embedded textures</li>
+        <li><strong>Units:</strong> 1 unit = 1 meter in Blender</li>
+        <li><strong>Origin:</strong> Model origin at base center for characters/buildings, at geometric center for props</li>
+        <li><strong>Scale:</strong> Apply all transforms before export</li>
+        <li><strong>UVs:</strong> Unwrap all models, minimize stretching, maximize texel density</li>
+        <li><strong>Textures:</strong> Power-of-2 dimensions, baked lighting where possible</li>
+    </ul>
+
+    <h3>10.4 Polygon Budgets</h3>
+    <table>
+        <tr>
+            <th>Asset Type</th>
+            <th>Triangle Budget</th>
+            <th>Texture Budget</th>
+        </tr>
+        <tr>
+            <td>Player Character</td>
+            <td>1,500</td>
+            <td>1x 512x512</td>
+        </tr>
+        <tr>
+            <td>NPC Character</td>
+            <td>1,200</td>
+            <td>1x 512x512</td>
+        </tr>
+        <tr>
+            <td>Building Exterior</td>
+            <td>3,000</td>
+            <td>2x 1024x1024</td>
+        </tr>
+        <tr>
+            <td>Building Interior</td>
+            <td>2,000</td>
+            <td>2x 1024x1024</td>
+        </tr>
+        <tr>
+            <td>Street Props (each)</td>
+            <td>200-500</td>
+            <td>1x 256x256 (shared atlas)</td>
+        </tr>
+        <tr>
+            <td>Vehicle (Sky Ace aircraft)</td>
+            <td>3,000</td>
+            <td>1x 1024x1024</td>
+        </tr>
+        <tr>
+            <td>Enemy Aircraft</td>
+            <td>2,000</td>
+            <td>1x 512x512</td>
+        </tr>
+        <tr>
+            <td>Projectile/Bullet</td>
+            <td>50</td>
+            <td>None (vertex colors)</td>
+        </tr>
+    </table>
+
+    <h3>10.5 Animation Guidelines</h3>
+    <ul>
+        <li><strong>Format:</strong> GLB with embedded animations</li>
+        <li><strong>Rig:</strong> Simple skeleton, max 20 bones per character</li>
+        <li><strong>Animation List (Player):</strong>
+            <ul>
+                <li><code>idle</code> - Looping, subtle breathing</li>
+                <li><code>walk</code> - Looping, 24fps, 30 frames</li>
+                <li><code>run</code> - Looping, 24fps, 20 frames</li>
+                <li><code>interact</code> - One-shot, 24fps, 45 frames</li>
+                <li><code>jump</code> - One-shot, 24fps, 30 frames</li>
+            </ul>
+        </li>
+        <li><strong>Animation List (Aircraft):</strong>
+            <ul>
+                <li><code>idle</code> - Subtle hover wobble</li>
+                <li><code>fly</code> - Continuous loop</li>
+                <li><code>bank_left</code> - Roll animation (blended)</li>
+                <li><code>bank_right</code> - Roll animation (blended)</li>
+                <li><code>boost</code> - Engine glow intensifies</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2><span class="section-number">11</span> Audio Design</h2>
+
+    <h3>11.1 Audio Categories</h3>
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Format</th>
+            <th>Bitrate</th>
+            <th>Max Duration</th>
+        </tr>
+        <tr>
+            <td>Music (BGM)</td>
+            <td>OGG Vorbis</td>
+            <td>128 kbps</td>
+            <td>3 minutes (looping)</td>
+        </tr>
+        <tr>
+            <td>Sound Effects (SFX)</td>
+            <td>OGG Vorbis</td>
+            <td>96 kbps</td>
+            <td>5 seconds</td>
+        </tr>
+        <tr>
+            <td>Ambience</td>
+            <td>OGG Vorbis</td>
+            <td>96 kbps</td>
+            <td>30 seconds (looping)</td>
+        </tr>
+        <tr>
+            <td>Voice Lines</td>
+            <td>OGG Vorbis</td>
+            <td>128 kbps</td>
+            <td>5 seconds</td>
+        </tr>
+    </table>
+
+    <h3>11.2 Music Structure</h3>
+    <p><strong>Street Scene:</strong> Laid-back synthwave, 90-100 BPM, chill vibes</p>
+    <p><strong>Sky Ace (Menu):</strong> Upbeat electronic, 110 BPM, building anticipation</p>
+    <p><strong>Sky Ace (Gameplay):</strong> High-energy synthwave, 130-140 BPM, driving bass</p>
+    <p><strong>Victory:</strong> Triumphant fanfare, 5-10 seconds</p>
+    <p><strong>Game Over:</strong> Dramatic but not depressing, 5-10 seconds</p>
+
+    <h3>11.3 Spatial Audio</h3>
+    <ul>
+        <li>Street ambience fades as player enters venues</li>
+        <li>Venue-specific ambience fades in</li>
+        <li>Neon signs emit subtle electrical hum (positional)</li>
+        <li>NPC conversations are non-positional (UI layer)</li>
+        <li>Sky Ace uses positional audio for engine roar (cockpit vs external camera)</li>
+    </ul>
+
+    <h2><span class="section-number">12</span> Multiplayer Roadmap</h2>
+
+    <h3>12.1 Phase 1: Single Player Foundation</h3>
+    <p><strong>Current Phase.</strong> All systems designed with multiplayer in mind but not implemented:</p>
+    <ul>
+        <li>Player controller supports multiple input sources</li>
+        <li>EventBus system can broadcast local or network events</li>
+        <li>NPC system can be replaced with remote player data</li>
+        <li>Physics uses deterministic update steps</li>
+    </ul>
+
+    <h3>12.2 Phase 2: Social Features (No Real-Time Multiplayer)</h3>
+    <ul>
+        <li>Player profiles and avatars</li>
+        <li>Global leaderboards (async)</li>
+        <li>Friend system (async)</li>
+        <li>Leave messages for other players (like Dark Souls)</li>
+        <li>Ghost data: see other players' flight paths as translucent trails</li>
+    </ul>
+
+    <h3>12.3 Phase 3: Real-Time Multiplayer</h3>
+    <p><strong>Technology:</strong> WebRTC (P2P) for 2-4 players, WebSockets for matchmaking + >4 players</p>
+    <ul>
+        <li><strong>Co-op:</strong> 2 players in Sky Ace missions together</li>
+        <li><strong>Versus:</strong> Dogfight mode, 2-4 players</li>
+        <li><strong>Street:</strong> See other players walking around (instanced areas, max 20)</li>
+        <li><strong>Sync Rate:</strong> 20Hz for positions, 10Hz for animations</li>
+        <li><strong>Prediction:</strong> Client-side prediction with server reconciliation</li>
+        <li><strong>Lag Compensation:</strong> 100ms buffer for hit detection</li>
+    </ul>
+
+    <h3>12.4 Networking Architecture (Future)</h3>
+    <div class="architecture-diagram">
+┌───────────────────────────────────────────────────────────────┐
+│                        CLIENT BROWSER                          │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │ Game Loop   │  │ Local State │  │ WebRTC Connection   │  │
+│  │ (60fps)     │  │ (Authoritative│  │ (P2P Data Channel) │  │
+│  └─────────────┘  │  for player) │  └─────────────────────┘  │
+│                   └─────────────┘                              │
+│                         │                                      │
+│  ┌──────────────────────┘                                      │
+│  │ Interpolation Buffer (100ms)                                │
+│  │ - Smooths remote player positions                           │
+│  │ - Hides network jitter                                     │
+│  └────────────────────────────────────────────────────────────┘
+│                         │
+├─────────────────────────┼──────────────────────────────────────┤
+│                         │ WebSocket (Signaling + Meta)         │
+│  ┌──────────────────────┴───────────────────────────────────┐  │
+│  │              MATCHMAKING SERVER (Node.js)                  │  │
+│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐   │  │
+│  │  │ Player Pool  │  │ Room Manager │  │ Relay (TURN) │   │  │
+│  │  │ (Redis)      │  │ (Rooms 2-8p) │  │ (Fallback)   │   │  │
+│  │  └──────────────┘  └──────────────┘  └──────────────┘   │  │
+│  └──────────────────────────────────────────────────────────┘  │
+└───────────────────────────────────────────────────────────────┘
+    </div>
+
+    <h2><span class="section-number">13</span> Testing & QA Procedures</h2>
+
+    <h3>13.1 Testing Pyramid</h3>
+    <ul>
+        <li><strong>Unit Tests (40%):</strong> Pure functions, math utilities, state logic</li>
+        <li><strong>Integration Tests (30%):</strong> Module interactions, game state transitions</li>
+        <li><strong>Visual/Render Tests (20%):</strong> Screenshot comparison for UI and scenes</li>
+        <li><strong>Manual QA (10%):</strong> Gameplay feel, edge cases, browser compatibility</li>
+    </ul>
+
+    <h3>13.2 Performance Testing</h3>
+    <p>Before any feature is considered complete, test on these devices:</p>
+    <table>
+        <tr>
+            <th>Device Tier</th>
+            <th>Example</th>
+            <th>Target FPS</th>
+            <th>Test Criteria</th>
+        </tr>
+        <tr>
+            <td>High-End Desktop</td>
+            <td>RTX 3060, i7, 16GB</td>
+            <td>60fps</td>
+            <td>All effects enabled, max draw distance</td>
+        </tr>
+        <tr>
+            <td>Mid-Range Desktop</td>
+            <td>GTX 1060, i5, 8GB</td>
+            <td>60fps</td>
+            <td>Standard settings</td>
+        </tr>
+        <tr>
+            <td>Low-End Desktop</td>
+            <td>Integrated GPU, i3, 4GB</td>
+            <td>30fps</td>
+            <td>Reduced effects, lower resolution</td>
+        </tr>
+        <tr>
+            <td>High-End Mobile</td>
+            <td>iPhone 14, Pixel 7</td>
+            <td>30fps</td>
+            <td>Touch controls, reduced particles</td>
+        </tr>
+        <tr>
+            <td>Mid-Range Mobile</td>
+            <td>iPhone SE, Galaxy A53</td>
+            <td>30fps</td>
+            <td>Lowest settings, simplified shaders</td>
+        </tr>
+    </table>
+
+    <h3>13.3 Browser Testing Matrix</h3>
+    <table>
+        <tr>
+            <th>Browser</th>
+            <th>Version</th>
+            <th>Priority</th>
+            <th>Notes</th>
+        </tr>
+        <tr>
+            <td>Chrome (Desktop)</td>
+            <td>Latest + Latest-1</td>
+            <td class="priority-high">P0</td>
+            <td>Primary development browser</td>
+        </tr>
+        <tr>
+            <td>Firefox (Desktop)</td>
+            <td>Latest</td>
+            <td class="priority-high">P0</td>
+            <td>Test WebGL compatibility</td>
+        </tr>
+        <tr>
+            <td>Safari (Desktop)</td>
+            <td>Latest</td>
+            <td class="priority-medium">P1</td>
+            <td>Test WebKit rendering</td>
+        </tr>
+        <tr>
+            <td>Edge (Desktop)</td>
+            <td>Latest</td>
+            <td class="priority-medium">P1</td>
+            <td>Chromium-based, usually compatible</td>
+        </tr>
+        <tr>
+            <td>Chrome (Mobile)</td>
+            <td>Latest</td>
+            <td class="priority-medium">P1</td>
+            <td>Android touch testing</td>
+        </tr>
+        <tr>
+            <td>Safari (iOS)</td>
+            <td>Latest</td>
+            <td class="priority-medium">P1</td>
+            <td>iPhone touch testing</td>
+        </tr>
+        <tr>
+            <td>Samsung Internet</td>
+            <td>Latest</td>
+            <td class="priority-low">P2</td>
+            <td>If time permits</td>
+        </tr>
+    </table>
+
+    <h3>13.4 QA Checklist (Per Feature)</h3>
+    <p>Before merging any feature branch:</p>
+    <ol>
+        <li>[ ] Feature works in Chrome and Firefox</li>
+        <li>[ ] Feature works at 1920x1080 and 375x667 resolutions</li>
+        <li>[ ] No console errors or warnings</li>
+        <li>[ ] Memory usage stable (no leaks over 5 minutes)</li>
+        <li>[ ] FPS remains above target on mid-range desktop</li>
+        <li>[ ] Touch controls work (if applicable)</li>
+        <li>[ ] All new assets are optimized (textures compressed, models decimated)</li>
+        <li>[ ] Accessibility: Color contrast meets WCAG AA</li>
+        <li>[ ] Code reviewed by at least 1 team member</li>
+        <li>[ ] Documentation updated (this file or inline comments)</li>
+    </ol>
+
+    <h2><span class="section-number">14</span> Build & Deployment</h2>
+
+    <h3>14.1 Development Environment</h3>
+    <pre><code># Clone repository
+git clone https://github.com/[org]/neon-city-arcade.git
+cd neon-city-arcade
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+# Opens at http://localhost:5173 with hot reload
+
+# Run tests
+npm test
+
+# Build for production
+npm run build
+# Output: dist/ directory with optimized bundle
+    </code></pre>
+
+    <h3>14.2 Production Build</h3>
+    <p>The production build includes:</p>
+    <ul>
+        <li>JavaScript minification + tree shaking</li>
+        <li>Texture compression (WebP/PNG optimization)</li>
+        <li>Asset lazy loading (games load on demand)</li>
+        <li>Service worker for offline support (Phase 2)</li>
+        <li>Source maps (for debugging, not deployed to prod)</li>
+    </ul>
+
+    <h3>14.3 Deployment Pipeline</h3>
+    <div class="architecture-diagram">
+Developer pushes to feature branch
+       ↓
+GitHub Actions runs tests + lint
+       ↓
+PR merged to develop
+       ↓
+Staging deployment (auto)
+       ↓
+QA tests on staging
+       ↓
+PR from develop → main
+       ↓
+Production deployment (manual trigger)
+       ↓
+Cloudflare Pages / Vercel / Netlify
+    </div>
+
+    <h3>14.4 Hosting Requirements</h3>
+    <table>
+        <tr>
+            <th>Requirement</th>
+            <th>Specification</th>
+        </tr>
+        <tr>
+            <td>Hosting</td>
+            <td>Static site (CDN preferred)</td>
+        </tr>
+        <tr>
+            <td>SSL</td>
+            <td>Required (HTTPS only)</td>
+        </tr>
+        <tr>
+            <td>CDN</td>
+            <td>Cloudflare / CloudFront for global asset delivery</td>
+        </tr>
+        <tr>
+            <td>Compression</td>
+            <td>Brotli + Gzip for all assets</td>
+        </tr>
+        <tr>
+            <td>Caching</td>
+            <td>Long-term cache for assets with hash in filename</td>
+        </tr>
+        <tr>
+            <td>Initial Load</td>
+            <td>Target under 3 seconds on 4G connection</td>
+        </tr>
+        <tr>
+            <td>Total Size</td>
+            <td>Initial bundle under 2MB, lazy-load games on demand</td>
+        </tr>
+    </table>
+
+    <h2><span class="section-number">15</span> Development Roadmap</h2>
+
+    <h3>15.1 Phase 1: Foundation (Weeks 1-6)</h3>
+    <table>
+        <tr>
+            <th>Week</th>
+            <th>Focus</th>
+            <th>Deliverables</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Project Setup + Core Systems</td>
+            <td>Repository, build pipeline, SceneManager, Renderer, InputManager</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>World Building</td>
+            <td>CityStreet, Building system, Lighting, basic Environment</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Player + Camera</td>
+            <td>Player model, movement, camera system, collision</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>NPC System</td>
+            <td>NPC models, spawning, schedules, basic dialogue</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Sky Ace Core</td>
+            <td>Aircraft model, flight controls, basic shooting, SkyEnvironment</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Sky Ace Missions + Polish</td>
+            <td>3 missions, scoring, HUD, sound effects, bug fixes</td>
+        </tr>
+    </table>
+
+    <h3>15.2 Phase 2: Content Expansion (Weeks 7-12)</h3>
+    <ul>
+        <li>Avatar customization system</li>
+        <li>Vaporwave Shop venue + collectibles</li>
+        <li>Neon Cafe venue + social interactions</li>
+        <li>Save/load system with IndexedDB</li>
+        <li>Settings menu (graphics, audio, controls)</li>
+        <li>Leaderboards (local + async global)</li>
+        <li>Additional Sky Ace missions</li>
+        <li>Mobile optimization + touch controls</li>
+    </ul>
+
+    <h3>15.3 Phase 3: Multiplayer + LiveOps (Weeks 13-20)</h3>
+    <ul>
+        <li>User accounts + authentication</li>
+        <li>Real-time multiplayer (WebRTC)</li>
+        <li>Friend system + matchmaking</li>
+        <li>Additional game venues</li>
+        <li>Seasonal events + limited-time content</li>
+        <li>Analytics integration</li>
+        <li>Monetization research (cosmetics?)</li>
+    </ul>
+
+    <div class="success">
+        <strong>Documentation Version:</strong> 1.0.0-alpha | 
+        <strong>Last Updated:</strong> May 15, 2026 (18:58) | 
+        <strong>Maintained by:</strong> Core Team | 
+        <strong>Next Review:</strong> June 1, 2026
+    </div>
+
+    <div class="warning">
+        <strong>Remember:</strong> This document is a living specification. When implementing features, 
+        always check this document first. If a conflict arises between this document and code, 
+        update this document via team discussion before changing code. Consistency across the 
+        entire project is more important than individual convenience.
+    </div>
+
+</body>
+</html>
