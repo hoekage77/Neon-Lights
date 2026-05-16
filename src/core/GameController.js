@@ -247,6 +247,7 @@ class GameController {
   _setupEventListeners() {
     // UI events
     eventBus.on('ui:start-game', () => this.startExploration());
+    eventBus.on('ui:quick-start', () => this.quickStart());
     eventBus.on('ui:resume-game', () => this.resumeGame());
     eventBus.on('ui:open-settings', () => this.setState(STATES.SETTINGS));
     eventBus.on('ui:close-settings', () => this.setState(STATES.PREVIOUS));
@@ -514,6 +515,33 @@ class GameController {
     this.physicsWorld.start();
 
     Logger.info('GameController', 'Started exploration');
+  }
+
+  /**
+   * Quick start — skip menu and go straight to Sky Ace.
+   */
+  async quickStart() {
+    this.uiManager.hideMainMenu();
+    this.inputManager.enable();
+    this.physicsWorld.start();
+
+    // Fade to black, enter venue, start game
+    await this.uiManager.fadeToBlack(400);
+
+    // Enter Sky Ace HQ
+    const venue = this.venueManager.enterVenue('sky-ace');
+    this.currentVenue = venue;
+
+    // Start Sky Ace game
+    this.setState(STATES.PLAYING);
+    const { SkyAceGame } = await import('../games/sky-ace/SkyAceGame.js');
+    this.currentGame = new SkyAceGame(this, this.currentVenue);
+    await this.currentGame.init();
+    this.inputManager.enable();
+
+    await this.uiManager.fadeFromBlack(400);
+
+    Logger.info('GameController', 'Quick started Sky Ace');
   }
 
   /**
